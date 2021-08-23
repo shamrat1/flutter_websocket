@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_websockets/NestedScrollViewTest.dart';
 import 'package:web_socket_channel/io.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
@@ -39,6 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
+        print("init called");
     channel.stream.listen((event) {
       setState(() {
         print(event);
@@ -51,6 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
+    print("dispose called");
     channel.sink.close();
     _messageController.dispose();
   }
@@ -61,6 +64,11 @@ class _MyHomePageState extends State<MyHomePage> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(widget.title),
+        actions: [
+          IconButton(onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context) => NestedScrollViewTest()));
+          }, icon: Icon(Icons.next_plan))
+        ],
       ),
       body: Center(
         child: Container(
